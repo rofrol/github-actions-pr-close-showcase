@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - master
-  pull_request_target:
-    types:
-      - closed
+  # pull_request_target:
+  #   types:
+  #     - closed
 permissions:
   contents: write
 jobs:
@@ -15,7 +15,7 @@ jobs:
     # if: github.event_name == 'push' && github.ref == 'refs/heads/master' && github.event.before == github.event.after
     # if: github.ref == 'refs/heads/master'
     # if: github.event.before == github.event.after
-    if: github.event.pull_request == null
+    if: github.ref == 'refs/heads/master'
     strategy:
       matrix:
         # disabling windows-latest for now. zig fmt --check gives strange results
