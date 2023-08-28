@@ -25,6 +25,7 @@ jobs:
       - run: |
           echo PR #${{ github.event.number }} test2 `zig version`
   mkdocs-gh-deploy:
+    needs: test
     if: needs.test.result == 'success' || needs.test.result == 'skipped'
     runs-on: ubuntu-latest
     steps:
