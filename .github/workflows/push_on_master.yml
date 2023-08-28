@@ -15,7 +15,7 @@ jobs:
     # if: github.event_name == 'push' && github.ref == 'refs/heads/master' && github.event.before == github.event.after
     # if: github.ref == 'refs/heads/master'
     # if: github.event.before == github.event.after
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     strategy:
       matrix:
         # disabling windows-latest for now. zig fmt --check gives strange results
@@ -25,6 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
+      - uses: 8BitJonny/gh-get-current-pr@2.2.0
+        id: PR
+      - run: echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
       - run: |
           echo PR #${{ github.event.number }} test2 `zig version`
   mkdocs-gh-deploy:
