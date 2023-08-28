@@ -2,7 +2,7 @@ name: push_on_master_without_pr
 on:
   push:
     # github.ref == 'refs/heads/master'
-    if: github.event.pull_request == null
+    if: github.event_name == 'push' && github.event.pull_request == null
     branches:
       - master
 permissions:
