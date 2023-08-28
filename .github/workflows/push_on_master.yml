@@ -11,6 +11,7 @@ permissions:
 jobs:
   check-current-pr:
     steps:
+      - uses: actions/checkout@v2
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
       - run: |
