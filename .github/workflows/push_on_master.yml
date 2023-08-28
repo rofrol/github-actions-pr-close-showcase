@@ -28,12 +28,12 @@ jobs:
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
       - run: |
-          echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
           if [ -z "${{ steps.PR.outputs.number }}" ]; then
             echo "PR=false" >> $GITHUB_OUTPUT
             echo Not a PR
           else
             echo Is a PR
+            echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
           fi
           echo PR #${{ github.event.number }} test2 `zig version`
   mkdocs-gh-deploy:
