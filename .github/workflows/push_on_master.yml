@@ -29,7 +29,7 @@ jobs:
         id: PR
       - run: |
           echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
-          if [ -z "$ steps.PR.outputs.number}" ]; then
+          if [ -z "${steps.PR.outputs.number}" ]; then
             echo "PR=false" >> $GITHUB_OUTPUT
             echo Not a PR
           else
