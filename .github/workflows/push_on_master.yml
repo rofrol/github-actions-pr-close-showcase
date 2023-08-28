@@ -24,6 +24,7 @@ jobs:
             echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
           fi
   test:
+    needs: check-current-pr
     if: MERGE_FROM_PULL_REQUEST == true
     strategy:
       matrix:
