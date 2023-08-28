@@ -13,4 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo PR #${{ github.event.number }} test8
+          echo PR #${{ github.event.number }} test12
