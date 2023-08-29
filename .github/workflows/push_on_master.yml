@@ -9,6 +9,55 @@ on:
 permissions:
   contents: write
 jobs:
+  test:
+    # if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # if: github.event.pull_request == null
+    # if: github.event_name == 'push' && github.ref == 'refs/heads/master' && github.event.before == github.event.after
+    # if: github.ref == 'refs/heads/master'
+    # if: github.event.before == github.event.after
+    # if: github.ref == 'refs/heads/master'
+    strategy:
+      matrix:
+        # disabling windows-latest for now. zig fmt --check gives strange results
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{matrix.os}}
+    outputs:
+      IS_PR: ${{ steps.PR.outputs.IS_PR }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: goto-bus-stop/setup-zig@v2
+      - uses: 8BitJonny/gh-get-current-pr@2.2.0
+        id: PR
+      - run: |
+          if [ -z "${{ steps.PR.outputs.number }}" ]; then
+            echo "IS_PR=false" >> $GITHUB_OUTPUT
+            echo Not a PR
+          else
+            echo Is a PR
+            echo "IS_PR=true" >> $GITHUB_OUTPUT
+            echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
+          fi
+  mkdocs-gh-deploy:
+    needs: test
+    # if: needs.test.result == 'success' || needs.test.result == 'skipped'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.4
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - uses: actions/cache@v3
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: echo PR #${{ github.event.number }} mkdocs-gh-deploy #${{ needs.test.result }}
+      - env:
+          IS_PR: ${{needs.test.outputs.IS_PR}}
+        run: echo is_pr "$IS_PR"
   job1:
     runs-on: ubuntu-latest
     # Map a step output to a job output
