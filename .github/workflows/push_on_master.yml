@@ -57,4 +57,4 @@ jobs:
       - run: echo PR #${{ github.event.number }} mkdocs-gh-deploy #${{ needs.test.result }}
       - env:
           IS_PR: ${{needs.test.outputs.IS_PR}}
-        run: echo "IS_PR: $IS_PR"
+        run: echo "IS_PR $IS_PR"
