@@ -55,4 +55,6 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: echo PR #${{ github.event.number }} mkdocs-gh-deploy #${{ needs.test.result }}
-      - run: echo needs.test.outputs.IS_PR: $needs.test.outputs.IS_PR
+      - env:
+          IS_PR: ${{needs.test.outputs.IS_PR}}
+        run: echo "IS_PR: $IS_PR"
