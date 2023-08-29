@@ -69,7 +69,7 @@ jobs:
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
       - id: step2
-        run: echo "test=world" >> "$GITHUB_OUTPUT"
+        run: echo "test=world2" >> "$GITHUB_OUTPUT"
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: step3
       # - run: echo "test=no" >> "$GITHUB_OUTPUT"
