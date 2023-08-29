@@ -35,4 +35,4 @@ jobs:
       - name: Use the value again 1
         id: step_two1
         run: |
-          echo "action_state is ${{ env.action_state }}" # Output works
+          echo "action_state is ${{ vars.action_state }}" # Output works
