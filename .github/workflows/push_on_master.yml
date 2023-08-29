@@ -28,7 +28,7 @@ jobs:
           # bash
           echo "Action State is: '${{ env.action_state }}'" # Output works
 
-  build_ubuntu_latest:
+  use_ubuntu_latest:
     runs-on: ubuntu-latest
     steps:
       - name: Use the value again 1
