@@ -73,7 +73,7 @@ jobs:
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
       - id: step3
-        run: echo "test=${steps.PR.outputs.number}" >> "$GITHUB_OUTPUT"
+        run: echo "test=${{steps.PR.outputs.number}}" >> "$GITHUB_OUTPUT"
       # - run: |
       #     if [ -z "${{ steps.PR.outputs.number }}" ]; then
       #       echo "is_pr=no" >> "$GITHUB_OUTPUT"
