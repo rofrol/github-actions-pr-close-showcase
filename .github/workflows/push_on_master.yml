@@ -34,14 +34,15 @@ jobs:
         # os: [ubuntu-latest, macos-latest, windows-latest]
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{matrix.os}}
-    env:
-      IS_PR: ${{ needs.set_env.outputs.IS_PR }}
+    # env:
+    #   IS_PR: ${{ needs.set_env.outputs.IS_PR }}
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
       - run: |
           echo Testing
-          echo IS_PR: ${{ IS_PR }}
+          # echo IS_PR: ${{ IS_PR }}
+          echo needs.set_env.outputs.IS_PR: ${{ needs.set_env.outputs.IS_PR }}
   mkdocs-gh-deploy:
     needs: test
     if: needs.test.result == 'success' || needs.test.result == 'skipped'
