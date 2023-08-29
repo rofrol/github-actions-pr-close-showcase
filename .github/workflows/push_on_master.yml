@@ -22,6 +22,8 @@ jobs:
         # os: [ubuntu-latest, macos-latest, windows-latest]
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{matrix.os}}
+    outputs:
+      IS_PR: ${{ steps.PR.outputs.IS_PR }}
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
@@ -29,12 +31,11 @@ jobs:
         id: PR
       - run: |
           if [ -z "${{ steps.PR.outputs.number }}" ]; then
-            echo "PR=false" >> $GITHUB_OUTPUT
+            echo "IS_PR=false" >> $GITHUB_OUTPUT
             echo Not a PR
-            echo "MERGE_FROM_PULL_REQUEST=false" >> $GITHUB_ENV
           else
             echo Is a PR
-            echo "MERGE_FROM_PULL_REQUEST=true" >> $GITHUB_ENV
+            echo "IS_PR=true" >> $GITHUB_OUTPUT
             echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
           fi
   mkdocs-gh-deploy:
@@ -54,4 +55,4 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: echo PR #${{ github.event.number }} mkdocs-gh-deploy #${{ needs.test.result }}
-      - run: echo needs.test.outputs.PR: $needs.test.outputs.PR
+      - run: echo needs.test.outputs.IS_PR: $needs.test.outputs.IS_PR
