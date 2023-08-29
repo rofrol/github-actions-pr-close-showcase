@@ -34,4 +34,4 @@ jobs:
       - name: Use the value again 1
         id: step_two1
         run: |
-          echo "Sleep State 1 is ${{ env.sleep_state1 }}" # Output works
+          echo "action_state is ${{ env.action_state }}" # Output works
