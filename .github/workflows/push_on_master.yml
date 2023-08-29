@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 jobs:
-  env:
+  set_env:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
             echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
           fi
   test:
-    needs: check-current-pr
+    needs: set_env
     # if: env.MERGE_FROM_PULL_REQUEST == 'true'
     strategy:
       matrix:
@@ -35,7 +35,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{matrix.os}}
     env:
-      IS_PR: ${{ needs.env.outputs.IS_PR }}
+      IS_PR: ${{ needs.set_env.outputs.IS_PR }}
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
