@@ -72,16 +72,16 @@ jobs:
         run: echo "test=world" >> "$GITHUB_OUTPUT"
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
-        # run: echo "test=${{steps.PR.outputs.number}}"
-      - run: |
-          if [ -z "${{ steps.PR.outputs.number }}" ]; then
-            echo "is_pr=no" >> "$GITHUB_OUTPUT"
-            echo Not a PR
-          else
-            echo Is a PR
-            echo "is_pr=yes" >> "$GITHUB_OUTPUT"
-            echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
-          fi
+      - run: echo "test=no" >> "$GITHUB_OUTPUT"
+      # - run: |
+      #     if [ -z "${{ steps.PR.outputs.number }}" ]; then
+      #       echo "is_pr=no" >> "$GITHUB_OUTPUT"
+      #       echo Not a PR
+      #     else
+      #       echo Is a PR
+      #       echo "is_pr=yes" >> "$GITHUB_OUTPUT"
+      #       echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
+      #     fi
   job2:
     runs-on: ubuntu-latest
     needs: job1
