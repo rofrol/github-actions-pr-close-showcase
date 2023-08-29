@@ -93,7 +93,7 @@ jobs:
           OUTPUT3: ${{needs.job1.outputs.output3}}
         run: echo "$OUTPUT1 $OUTPUT2 $OUTPUT3"
       - run: |
-          if [ -z "${{ needs.job1.outputs.output3 }}" == 'false' ]; then
+          if [ "${{ needs.job1.outputs.output3 }}" == 'false' ]; then
             echo Not a PR
           else
             echo Is a PR
