@@ -27,7 +27,7 @@ jobs:
           fi
   test:
     needs: check-current-pr
-    if: MERGE_FROM_PULL_REQUEST == true
+    if: env.MERGE_FROM_PULL_REQUEST == 'true'
     strategy:
       matrix:
         # disabling windows-latest for now. zig fmt --check gives strange results
