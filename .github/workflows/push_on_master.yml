@@ -64,7 +64,7 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step2.outputs.test }}
-      output3: ${{ steps.step3.outputs.test }}
+      output3: ${{ steps.step3.outputs.pr_found }}
     steps:
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
@@ -72,7 +72,7 @@ jobs:
         run: echo "test=world" >> "$GITHUB_OUTPUT"
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: step3
-        run: echo "test=no" >> "$GITHUB_OUTPUT"
+      - run: echo "test=no" >> "$GITHUB_OUTPUT"
       # - run: |
       #     if [ -z "${{ steps.PR.outputs.number }}" ]; then
       #       echo "is_pr=no" >> "$GITHUB_OUTPUT"
