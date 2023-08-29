@@ -92,3 +92,8 @@ jobs:
           OUTPUT2: ${{needs.job1.outputs.output2}}
           OUTPUT3: ${{needs.job1.outputs.output3}}
         run: echo "$OUTPUT1 $OUTPUT2 $OUTPUT3"
+  job3:
+    runs-on: ubuntu-latest
+    needs: job2
+    steps:
+      run: echo job3
