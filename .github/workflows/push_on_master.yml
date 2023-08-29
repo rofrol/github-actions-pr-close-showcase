@@ -64,7 +64,7 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step2.outputs.test }}
-      output3: ${{ steps.PR.outputs.IS_PR }}
+      output3: ${{ steps.PR.outputs.is_pr }}
     steps:
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
@@ -74,11 +74,11 @@ jobs:
         id: PR
       - run: |
           if [ -z "${{ steps.PR.outputs.number }}" ]; then
-            echo "IS_PR=false" >> $GITHUB_OUTPUT
+            echo "is_pr=no" >> $GITHUB_OUTPUT
             echo Not a PR
           else
             echo Is a PR
-            echo "IS_PR=true" >> $GITHUB_OUTPUT
+            echo "is_pr=yes" >> $GITHUB_OUTPUT
             echo "Your PR number is ${{ steps.PR.outputs.number }} and its JSON is ${{ steps.PR.outputs.pr }}"
           fi
   job2:
