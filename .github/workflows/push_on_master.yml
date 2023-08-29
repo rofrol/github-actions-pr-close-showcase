@@ -72,7 +72,7 @@ jobs:
         run: echo "test=world" >> "$GITHUB_OUTPUT"
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
-      - run: |
+        run: |
           if [ -z "${{ steps.PR.outputs.number }}" ]; then
             echo "is_pr=no" >> "$GITHUB_OUTPUT"
             echo Not a PR
